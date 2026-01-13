@@ -1,0 +1,25 @@
+# Terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.*
+crash.log
+crash.*.log
+
+# omit when introducing to cloud services
+.terraform.lock.hcl 
+
+# Terraform variable files (local overrides, secrets)
+*.tfvars
+*.tfvars.json
+
+# Pre-commit
+.pre-commit-cache/
+
+# Docker
+**/.env
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
