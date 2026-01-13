@@ -56,7 +56,7 @@ infra/
     dev/
 ```
 
-Application code (used only to validate infrastructure wiring) lives outside the Terraform code under `apps/`.
+>(TODO) Application code (used only to validate infrastructure wiring) lives outside the Terraform code under `apps/`.
 
 ## Features
 
@@ -110,7 +110,7 @@ A separate `stage` environment is intentionally omitted for now to keep the scop
 
 * This is not a production-ready platform.
 * The application code is intentionally minimal.
-* Advanced AWS features (IAM policies, autoscaling, multi-region setups) are out of scope for the initial version.
+* Advanced AWS features (IAM policies, autoscaling, multi-region setups) are out of scope initially.
 
 ## Why this exists
 
