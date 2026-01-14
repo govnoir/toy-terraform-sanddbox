@@ -3,6 +3,16 @@ module "network" {
   name   = local.network
 }
 
+module "postgres" {
+  source       = "../../modules/postgres"
+  name         = "${var.env}-postgres"
+  image        = "postgres:latest"
+  network_name = module.network.network_name
+  database     = "app"
+  username     = "app"
+  password     = "app"
+}
+
 module "hello" {
   source       = "../../modules/service"
   name         = "${var.env}-hello"
