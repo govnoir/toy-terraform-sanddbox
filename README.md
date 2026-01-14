@@ -91,8 +91,8 @@ infra/
 
   * an isolated Docker network
   * application and worker services (TODO)
-  * supporting services such as Postgres and Redis (TODO)
-  * a reverse proxy (Traefik) for HTTP routing (TODO)
+  * supporting services such as Postgres and Redis
+  * a reverse proxy (Traefik) for HTTP routing
 * Intended for rapid iteration and learning.
 
 ### prod (future/ TODO, AWS)
