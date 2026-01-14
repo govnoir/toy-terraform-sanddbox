@@ -8,9 +8,19 @@ module "postgres" {
   name         = "${var.env}-postgres"
   image        = "postgres:latest"
   network_name = module.network.network_name
-  database     = "app"
-  username     = "app"
-  password     = "app"
+  database     = "postgres"
+  username     = "postgres"
+  password     = "postgres"
+}
+
+module "redis" {
+  source       = "../../modules/redis"
+  name         = "${var.env}-redis"
+  image        = "redis:latest"
+  network_name = module.network.network_name
+  database     = "redis"
+  username     = "redis"
+  password     = "redis"
 }
 
 module "hello" {
