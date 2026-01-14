@@ -28,6 +28,7 @@ resource "docker_container" "traefik" {
     "--providers.docker=true",
     "--providers.docker.exposedbydefault=false",
     "--entrypoints.web.address=:80",
+    "--entrypoints.traefik.address=:8080",
     "--api.dashboard=true",
     "--api.insecure=true"
   ]
