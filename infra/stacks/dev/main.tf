@@ -17,6 +17,10 @@ module "postgres" {
   database     = "postgres"
   username     = "postgres"
   password     = "postgres"
+
+  labels = {
+    "traefik.enable" = "true"
+  }
 }
 
 module "redis" {
@@ -27,6 +31,10 @@ module "redis" {
   database     = "redis"
   username     = "redis"
   password     = "redis"
+
+  labels = {
+    "traefik.enable" = "true"
+  }
 }
 
 module "hello" {
@@ -34,17 +42,20 @@ module "hello" {
   name         = "${var.env}-hello"
   image        = "hashicorp/http-echo:1.0"
   network_name = module.network.network_name
+
   labels = {
     env     = var.env
     example = "true"
+
+    "traefik.enable"                                       = "true"
+    "traefik.http.routers.hello.rule"                      = "PathPrefix(`/hello`)"
+    "traefik.http.routers.hello.entrypoints"               = "web"
+    "traefik.http.services.hello.loadbalancer.server.port" = "5678"
   }
 
   env = {
-    ECHO_TEXT = "hello from terraform"
+    ECHO_TEXT = "hello from terraform - via traefik"
   }
 
-  ports = [{
-    internal = 5678
-    external = 18080
-  }]
+  #   ports = []
 }
