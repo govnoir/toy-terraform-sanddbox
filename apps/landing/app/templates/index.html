@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Toy Terraform Platform - {{ data.env }}</title>
+    <style>
+      body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 2rem; }
+      .card { border: 1px solid #ddd; border-radius: 10px; padding: 1rem 1.25rem; margin: 1rem 0; }
+      .ok { color: #0a7a0a; font-weight: 600; }
+      .bad { color: #b00020; font-weight: 600; }
+      code { background: #f6f6f6; padding: 0.15rem 0.35rem; border-radius: 6px; }
+      .muted { color: #666; }
+    </style>
+  </head>
+  <body>
+    <h1>Toy Terraform Platform</h1>
+    <p class="muted">Environment: <code>{{ data.env }}</code> · Now: <code>{{ data.now }}</code></p>
+
+    <div class="card">
+      <h2>Postgres</h2>
+      <p>
+        TCP: {% if data.pg.tcp_ok %}<span class="ok">OK</span>{% else %}<span class="bad">FAIL</span>{% endif %}
+        <span class="muted">({{ data.pg.tcp_msg }})</span>
+      </p>
+      <p>
+        Query: {% if data.pg.ok %}<span class="ok">OK</span>{% else %}<span class="bad">FAIL</span>{% endif %}
+        <span class="muted">({{ data.pg.msg }})</span>
+      </p>
+      {% if data.pg.version %}
+        <p>Version: <code>{{ data.pg.version }}</code></p>
+      {% endif %}
+      {% if data.pg.latest_heartbeat %}
+        <p>Latest worker heartbeat: <code>{{ data.pg.latest_heartbeat }}</code></p>
+      {% else %}
+        <p class="muted">No heartbeats yet.</p>
+      {% endif %}
+    </div>
+
+    <div class="card">
+      <h2>Redis</h2>
+      <p>
+        TCP: {% if data.redis.tcp_ok %}<span class="ok">OK</span>{% else %}<span class="bad">FAIL</span>{% endif %}
+        <span class="muted">({{ data.redis.tcp_msg }})</span>
+      </p>
+      <p>
+        Ping: {% if data.redis.ok %}<span class="ok">OK</span>{% else %}<span class="bad">FAIL</span>{% endif %}
+        <span class="muted">({{ data.redis.msg }})</span>
+      </p>
+    </div>
+
+    {% if data.errors and data.errors|length > 0 %}
+      <div class="card">
+        <h2>Config errors</h2>
+        <pre>{{ data.errors | join("\n") }}</pre>
+      </div>
+    {% endif %}
+
+    <p class="muted">Tip: this page is intended to validate Terraform wiring (outputs → env vars), not to be a real UI.</p>
+  </body>
+</html>
