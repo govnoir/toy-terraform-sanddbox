@@ -20,11 +20,11 @@ resource "docker_container" "this" {
     }
   }
 
-  dynamic "ports" {
-    for_each = var.ports
-    content {
-      internal = ports.value.internal
-      external = ports.value.external
-    }
-  }
+  # dynamic "ports" {
+  #   for_each = var.ports
+  #   content {
+  #     internal = ports.value.internal
+  #     external = ports.value.external
+  #   }
+  # }
 }

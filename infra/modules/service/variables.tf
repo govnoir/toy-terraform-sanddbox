@@ -28,11 +28,11 @@ variable "labels" {
   default     = {}
 }
 
-variable "ports" {
-  description = "List of port mappings for the container"
-  type = list(object({
-    internal = number
-    external = number
-  }))
-  default = []
-}
+# variable "ports" {
+#   description = "List of port mappings for the container"
+#   type = list(object({
+#     internal = number
+#     external = number
+#   }))
+#   default = []
+# }

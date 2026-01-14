@@ -37,14 +37,16 @@ module "hello" {
   labels = {
     env     = var.env
     example = "true"
+
+    "traefik.enable"                                       = "true"
+    "traefik.http.routers.hello.rule"                      = "PathPrefix(`/hello`)"
+    "traefik.http.routers.hello.entrypoints"               = "web"
+    "traefik.http.services.hello.loadbalancer.server.port" = "5678"
   }
 
   env = {
-    ECHO_TEXT = "hello from terraform"
+    ECHO_TEXT = "hello from terraform - via traefik"
   }
 
-  ports = [{
-    internal = 5678
-    external = 18080
-  }]
+  #   ports = []
 }
