@@ -90,10 +90,18 @@ infra/
 * Provisions:
 
   * an isolated Docker network
-  * application and worker services (TODO)
   * supporting services such as Postgres and Redis
   * a reverse proxy (Traefik) for HTTP routing
+  * application and worker services
 * Intended for rapid iteration and learning.
+
+#### Landing app
+A small FastAPI application used to validate infrastructure wiring.
+It exposes a status page showing connectivity to Postgres and Redis and displays worker heartbeats.
+
+#### Worker
+A background process that periodically writes heartbeats to Postgres (and optionally Redis).
+It exists to create observable side-effects for the landing page.
 
 ### prod (future/ TODO, AWS)
 
