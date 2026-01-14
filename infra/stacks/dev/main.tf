@@ -37,6 +37,52 @@ module "redis" {
   }
 }
 
+module "landing" {
+  source       = "../../modules/service"
+  name         = "${var.env}-landing"
+  image        = "toy-landing:dev"
+  network_name = module.network.network_name
+
+  labels = {
+    env     = var.env
+    example = "true"
+
+    "traefik.enable"                                         = "true"
+    "traefik.http.routers.landing.rule"                      = "PathPrefix(`/`)"
+    "traefik.http.routers.landing.entrypoints"               = "web"
+    "traefik.http.services.landing.loadbalancer.server.port" = "8080"
+  }
+
+  env = {
+    POSTGRES_HOST = module.postgres.host
+    POSTGRES_DB   = module.postgres.database
+    POSTGRES_USER = module.postgres.username
+    POSTGRES_PASS = "postgres"
+
+    REDIS_HOST = module.redis.host
+    REDIS_USER = module.redis.username
+    REDIS_DB   = "redis"
+  }
+}
+
+module "worker" {
+  source       = "../../modules/service"
+  name         = "${var.env}-worker"
+  image        = "toy-worker:dev"
+  network_name = module.network.network_name
+
+  env = {
+    POSTGRES_HOST = module.postgres.host
+    POSTGRES_DB   = module.postgres.database
+    POSTGRES_USER = module.postgres.username
+    POSTGRES_PASS = "postgres"
+
+    REDIS_HOST = module.redis.host
+    REDIS_USER = module.redis.username
+    REDIS_DB   = "redis"
+  }
+}
+
 module "hello" {
   source       = "../../modules/service"
   name         = "${var.env}-hello"
