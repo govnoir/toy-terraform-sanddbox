@@ -3,6 +3,12 @@ module "network" {
   name   = local.network
 }
 
+module "traefik" {
+  source       = "../../modules/reverse_proxy_traefik"
+  name         = "${var.env}-traefik"
+  network_name = module.network.network_name
+}
+
 module "postgres" {
   source       = "../../modules/postgres"
   name         = "${var.env}-postgres"
