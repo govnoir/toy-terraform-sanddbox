@@ -10,6 +10,14 @@ resource "docker_container" "postgres" {
     name = var.network_name
   }
 
+  dynamic "labels" {
+    for_each = var.labels
+    content {
+      label = labels.key
+      value = labels.value
+    }
+  }
+
   env = [
     "POSTGRES_USER=${var.username}",
     "POSTGRES_PASSWORD=${var.password}",

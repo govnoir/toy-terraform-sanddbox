@@ -10,6 +10,14 @@ resource "docker_container" "redis" {
     name = var.network_name
   }
 
+  dynamic "labels" {
+    for_each = var.labels
+    content {
+      label = labels.key
+      value = labels.value
+    }
+  }
+
   env = [
     "REDIS_USER=${var.username}",
     "REDIS_PASSWORD=${var.password}",
@@ -17,7 +25,7 @@ resource "docker_container" "redis" {
   ]
 
   healthcheck {
-    test     = ["CMD-SHELL", "pg_isready -U ${var.username}"]
+    test     = ["CMD", "redis-cli", "ping"]
     interval = "30s"
     timeout  = "10s"
     retries  = 5

@@ -5,9 +5,9 @@ variable "name" {
 }
 
 variable "image" {
-  description = "Docker image to be used for the PostgreSQL container"
+  description = "Docker image to be used for the Redis container"
   type        = string
-  default     = "postgres:latest"
+  default     = "redis:latest"
 }
 
 variable "network_name" {
@@ -38,4 +38,10 @@ variable "port" {
   description = "Port on which Redis will listen"
   type        = number
   default     = 6379
+}
+
+variable "labels" {
+  description = "Labels to apply to the container"
+  type        = map(string)
+  default     = {}
 }

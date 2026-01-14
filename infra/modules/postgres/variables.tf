@@ -39,3 +39,9 @@ variable "port" {
   type        = number
   default     = 5432
 }
+
+variable "labels" {
+  description = "Labels to apply to the container"
+  type        = map(string)
+  default     = {}
+}
