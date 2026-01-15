@@ -1,5 +1,5 @@
 module "network" {
-  source = "../../modules/network"
+  source = "../../modules/network_docker"
   name   = local.network
 }
 
@@ -38,7 +38,7 @@ module "redis" {
 }
 
 module "landing" {
-  source       = "../../modules/service"
+  source       = "../../modules/service_docker"
   name         = "${var.env}-landing"
   image        = "toy-landing:dev"
   network_name = module.network.network_name
@@ -66,7 +66,7 @@ module "landing" {
 }
 
 module "worker" {
-  source       = "../../modules/service"
+  source       = "../../modules/service_docker"
   name         = "${var.env}-worker"
   image        = "toy-worker:dev"
   network_name = module.network.network_name
@@ -84,7 +84,7 @@ module "worker" {
 }
 
 module "hello" {
-  source       = "../../modules/service"
+  source       = "../../modules/service_docker"
   name         = "${var.env}-hello"
   image        = "hashicorp/http-echo:1.0"
   network_name = module.network.network_name
