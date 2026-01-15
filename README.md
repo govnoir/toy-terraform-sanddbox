@@ -103,6 +103,10 @@ It exposes a status page showing connectivity to Postgres and Redis and displays
 A background process that periodically writes heartbeats to Postgres (and optionally Redis).
 It exists to create observable side-effects for the landing page.
 
+### stage (local AWS simulation)
+The stage stack uses the AWS provider configured against LocalStack.
+It is intended to practice AWS-oriented Terraform patterns without deploying to a real AWS account.
+
 ### prod (future/ TODO, AWS)
 
 A future `prod` stack may be added that:
