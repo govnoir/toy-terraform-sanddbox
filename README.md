@@ -19,6 +19,8 @@ The main goals of this project are:
 This project requires that you have installed 
 * [Terraform](https://developer.hashicorp.com/terraform/install)
 * [Docker](https://docs.docker.com/desktop/)
+* [Localstack](https://docs.localstack.cloud/aws/getting-started/installation/) (Simulates AWS locally)
+
 
 The project also uses pre-commit to enforce Terraform formatting and basic validation, for installation see: [https://github.com/antonbabenko/pre-commit-terraform?tab=readme-ov-file#how-to-install](https://github.com/antonbabenko/pre-commit-terraform?tab=readme-ov-file#how-to-install). 
 
@@ -56,7 +58,7 @@ infra/
     dev/
 ```
 
->(TODO) Application code (used only to validate infrastructure wiring) lives outside the Terraform code under `apps/`.
+Application code (used only to validate infrastructure wiring) lives outside the Terraform code under `apps/`.
 
 ## Features
 
